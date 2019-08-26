@@ -36,9 +36,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.expedia.apiary.extensions.receiver.common.messaging.MessageEvent;
 
 import com.expediagroup.beekeeper.core.error.BeekeeperException;
-import com.expediagroup.beekeeper.core.model.EntityHousekeepingPath;
-import com.expediagroup.beekeeper.scheduler.apiary.messaging.PathEventReader;
-import com.expediagroup.beekeeper.scheduler.apiary.model.PathEvent;
+import com.expediagroup.beekeeper.core.messaging.EventReader;
+import com.expediagroup.beekeeper.core.model.Event;
+import com.expediagroup.beekeeper.core.model.HousekeepingPath;
+import com.expediagroup.beekeeper.core.model.entity.EntityHousekeepingPath;
 import com.expediagroup.beekeeper.scheduler.apiary.service.PathSchedulerApiary;
 
 @ExtendWith(MockitoExtension.class)
@@ -50,7 +51,7 @@ public class PathSchedulerApiaryTest {
   private SchedulerService pathSchedulerService;
 
   @Mock
-  private PathEventReader pathEventReader;
+  private EventReader<HousekeepingPath> pathEventReader;
 
   @Mock
   private EntityHousekeepingPath path;
@@ -64,7 +65,7 @@ public class PathSchedulerApiaryTest {
 
   @Test
   public void typicalSchedule() {
-    Optional<PathEvent> event = Optional.of(newPathEvent(path));
+    Optional<Event<HousekeepingPath>> event = Optional.of(newPathEvent(path));
     when(pathEventReader.read()).thenReturn(event);
     scheduler.schedulePath();
     verify(pathSchedulerService).scheduleForHousekeeping(path);
@@ -82,7 +83,7 @@ public class PathSchedulerApiaryTest {
   @Test
   public void repositoryThrowsException() {
     when(path.getPath()).thenReturn(PATH);
-    Optional<PathEvent> event = Optional.of(newPathEvent(path));
+    Optional<Event<HousekeepingPath>> event = Optional.of(newPathEvent(path));
     when(pathEventReader.read()).thenReturn(event);
     doThrow(new BeekeeperException("exception")).when(pathSchedulerService).scheduleForHousekeeping(path);
 
@@ -104,7 +105,7 @@ public class PathSchedulerApiaryTest {
     verify(pathEventReader, times(1)).close();
   }
 
-  private PathEvent newPathEvent(EntityHousekeepingPath path) {
-    return new PathEvent(path, Mockito.mock(MessageEvent.class));
+  private Event<HousekeepingPath> newPathEvent(EntityHousekeepingPath path) {
+    return new Event<>(path, Mockito.mock(MessageEvent.class));
   }
 }

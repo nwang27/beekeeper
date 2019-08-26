@@ -24,28 +24,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.expediagroup.beekeeper.core.error.BeekeeperException;
+import com.expediagroup.beekeeper.core.messaging.EventReader;
+import com.expediagroup.beekeeper.core.model.Event;
 import com.expediagroup.beekeeper.core.model.HousekeepingPath;
-import com.expediagroup.beekeeper.scheduler.apiary.messaging.PathEventReader;
-import com.expediagroup.beekeeper.scheduler.apiary.model.PathEvent;
 import com.expediagroup.beekeeper.scheduler.service.SchedulerService;
 
 @Component
 public class PathSchedulerApiary {
 
-  private final PathEventReader pathEventReader;
+  private final EventReader<HousekeepingPath> pathEventReader;
   private final SchedulerService pathSchedulerService;
 
   @Autowired
-  public PathSchedulerApiary(PathEventReader pathEventReader, SchedulerService pathSchedulerService) {
+  public PathSchedulerApiary(EventReader<HousekeepingPath> pathEventReader, SchedulerService pathSchedulerService) {
     this.pathEventReader = pathEventReader;
     this.pathSchedulerService = pathSchedulerService;
   }
 
   public void schedulePath() {
-    Optional<PathEvent> pathToBeScheduled = pathEventReader.read();
+    Optional<Event<HousekeepingPath>> pathToBeScheduled = pathEventReader.read();
     if (pathToBeScheduled.isPresent()) {
-      PathEvent pathEvent = pathToBeScheduled.get();
-      HousekeepingPath path = pathEvent.getHousekeepingPath();
+      Event<HousekeepingPath> pathEvent = pathToBeScheduled.get();
+      HousekeepingPath path = pathEvent.getEventEntity();
       try {
         pathSchedulerService.scheduleForHousekeeping(path);
       } catch (Exception e) {

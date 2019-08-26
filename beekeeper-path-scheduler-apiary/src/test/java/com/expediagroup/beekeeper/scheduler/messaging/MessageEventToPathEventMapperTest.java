@@ -45,9 +45,9 @@ import com.expedia.apiary.extensions.receiver.common.messaging.MessageEvent;
 import com.expedia.apiary.extensions.receiver.common.messaging.MessageProperty;
 import com.expedia.apiary.extensions.receiver.sqs.messaging.SqsMessageProperty;
 
+import com.expediagroup.beekeeper.core.model.Event;
 import com.expediagroup.beekeeper.core.model.HousekeepingPath;
 import com.expediagroup.beekeeper.scheduler.apiary.messaging.MessageEventToPathEventMapper;
-import com.expediagroup.beekeeper.scheduler.apiary.model.PathEvent;
 
 @ExtendWith(MockitoExtension.class)
 @ExtendWith(SpringExtension.class)
@@ -82,7 +82,7 @@ public class MessageEventToPathEventMapperTest {
     when(alterPartitionEvent.getEventType()).thenReturn(EventType.ALTER_PARTITION);
     when(alterPartitionEvent.getOldPartitionLocation()).thenReturn(OLD_PATH);
     MessageEvent messageEvent = newMessageEvent(alterPartitionEvent);
-    Optional<PathEvent> pathEvent = mapper.map(messageEvent);
+    Optional<Event<HousekeepingPath>> pathEvent = mapper.map(messageEvent);
     assertPath(messageEvent, pathEvent, CLEANUP_DELAY);
   }
 
@@ -92,7 +92,7 @@ public class MessageEventToPathEventMapperTest {
     when(alterTableEvent.getEventType()).thenReturn(EventType.ALTER_TABLE);
     when(alterTableEvent.getOldTableLocation()).thenReturn(OLD_PATH);
     MessageEvent messageEvent = newMessageEvent(alterTableEvent);
-    Optional<PathEvent> pathEvent = mapper.map(messageEvent);
+    Optional<Event<HousekeepingPath>> pathEvent = mapper.map(messageEvent);
     assertPath(messageEvent, pathEvent, CLEANUP_DELAY);
   }
 
@@ -102,7 +102,7 @@ public class MessageEventToPathEventMapperTest {
     when(dropPartitionEvent.getEventType()).thenReturn(EventType.DROP_PARTITION);
     when(dropPartitionEvent.getPartitionLocation()).thenReturn(OLD_PATH);
     MessageEvent messageEvent = newMessageEvent(dropPartitionEvent);
-    Optional<PathEvent> pathEvent = mapper.map(messageEvent);
+    Optional<Event<HousekeepingPath>> pathEvent = mapper.map(messageEvent);
     assertPath(messageEvent, pathEvent, CLEANUP_DELAY);
   }
 
@@ -112,7 +112,7 @@ public class MessageEventToPathEventMapperTest {
     when(dropTableEvent.getEventType()).thenReturn(EventType.DROP_TABLE);
     when(dropTableEvent.getTableLocation()).thenReturn(OLD_PATH);
     MessageEvent messageEvent = newMessageEvent(dropTableEvent);
-    Optional<PathEvent> pathEvent = mapper.map(messageEvent);
+    Optional<Event<HousekeepingPath>> pathEvent = mapper.map(messageEvent);
     assertPath(messageEvent, pathEvent, CLEANUP_DELAY);
   }
 
@@ -123,14 +123,14 @@ public class MessageEventToPathEventMapperTest {
     when(alterPartitionEvent.getOldPartitionLocation()).thenReturn(OLD_PATH);
     when(alterPartitionEvent.getTableParameters()).thenReturn(Collections.emptyMap());
     MessageEvent messageEvent = newMessageEvent(alterPartitionEvent);
-    Optional<PathEvent> pathEvent = mapper.map(messageEvent);
+    Optional<Event<HousekeepingPath>> pathEvent = mapper.map(messageEvent);
     assertPath(messageEvent, pathEvent, DEFAULT_CLEANUP_DELAY);
   }
 
-  private void assertPath(MessageEvent messageEvent, Optional<PathEvent> pathEventOptional, String cleanupDelay) {
-    PathEvent pathEvent = pathEventOptional.get();
+  private void assertPath(MessageEvent messageEvent, Optional<Event<HousekeepingPath>> pathEventOptional, String cleanupDelay) {
+    Event<HousekeepingPath> pathEvent = pathEventOptional.get();
     assertThat(pathEvent.getMessageEvent()).isEqualTo(messageEvent);
-    HousekeepingPath path = pathEvent.getHousekeepingPath();
+    HousekeepingPath path = pathEvent.getEventEntity();
     LocalDateTime now = LocalDateTime.now();
     assertThat(path.getPath()).isEqualTo(OLD_PATH);
     assertThat(path.getTableName()).isEqualTo(TABLE);

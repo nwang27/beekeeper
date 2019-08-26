@@ -22,6 +22,7 @@ import com.expedia.apiary.extensions.receiver.common.event.AlterTableEvent;
 import com.expedia.apiary.extensions.receiver.common.event.DropPartitionEvent;
 import com.expedia.apiary.extensions.receiver.common.event.DropTableEvent;
 import com.expedia.apiary.extensions.receiver.common.event.ListenerEvent;
+import com.expediagroup.beekeeper.core.filter.ListenerEventFilter;
 
 @Component
 public class EventTypeListenerEventFilter implements ListenerEventFilter {

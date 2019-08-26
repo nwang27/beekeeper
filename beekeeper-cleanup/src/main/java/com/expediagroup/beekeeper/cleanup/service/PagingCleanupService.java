@@ -32,7 +32,7 @@ import io.micrometer.core.annotation.Timed;
 
 import com.expediagroup.beekeeper.cleanup.path.PathCleaner;
 import com.expediagroup.beekeeper.core.error.BeekeeperException;
-import com.expediagroup.beekeeper.core.model.EntityHousekeepingPath;
+import com.expediagroup.beekeeper.core.model.entity.EntityHousekeepingPath;
 import com.expediagroup.beekeeper.core.model.PathStatus;
 import com.expediagroup.beekeeper.core.repository.HousekeepingPathRepository;
 

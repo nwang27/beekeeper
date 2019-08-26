@@ -32,12 +32,14 @@ import com.expedia.apiary.extensions.receiver.common.event.EventType;
 import com.expedia.apiary.extensions.receiver.common.event.ListenerEvent;
 import com.expedia.apiary.extensions.receiver.common.messaging.MessageEvent;
 
-import com.expediagroup.beekeeper.core.model.EntityHousekeepingPath;
+import com.expediagroup.beekeeper.core.messaging.EventMapper;
+import com.expediagroup.beekeeper.core.model.entity.EntityHousekeepingPath;
+import com.expediagroup.beekeeper.core.model.Event;
+import com.expediagroup.beekeeper.core.model.HousekeepingPath;
 import com.expediagroup.beekeeper.core.model.PathStatus;
-import com.expediagroup.beekeeper.scheduler.apiary.model.PathEvent;
 
 @Component
-public class MessageEventToPathEventMapper {
+public class MessageEventToPathEventMapper implements EventMapper<HousekeepingPath> {
 
   private static final Logger log = LoggerFactory.getLogger(MessageEventToPathEventMapper.class);
   private static final String CLIENT_ID = "apiary-metastore-event";
@@ -48,7 +50,7 @@ public class MessageEventToPathEventMapper {
   @Value("${properties.apiary.cleanup-delay-property-key}")
   private String cleanupDelayPropertyKey;
 
-  public Optional<PathEvent> map(MessageEvent messageEvent) {
+  public Optional<Event<HousekeepingPath>> map(MessageEvent messageEvent) {
     ListenerEvent listenerEvent = messageEvent.getEvent();
     EventType eventType = listenerEvent.getEventType();
     String cleanupDelay = listenerEvent.getTableParameters()
@@ -84,6 +86,6 @@ public class MessageEventToPathEventMapper {
       break;
     }
 
-    return Optional.of(new PathEvent(builder.build(), messageEvent));
+    return Optional.of(new Event<>(builder.build(), messageEvent));
   }
 }

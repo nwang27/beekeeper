@@ -24,7 +24,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.expediagroup.beekeeper.core.model.EntityHousekeepingPath;
+import com.expediagroup.beekeeper.core.model.entity.EntityHousekeepingPath;
 
 @Repository
 public interface HousekeepingPathRepository extends JpaRepository<EntityHousekeepingPath, Long> {

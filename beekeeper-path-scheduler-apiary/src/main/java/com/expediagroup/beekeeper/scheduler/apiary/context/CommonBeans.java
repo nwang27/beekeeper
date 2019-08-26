@@ -29,14 +29,15 @@ import org.springframework.retry.annotation.EnableRetry;
 import com.expedia.apiary.extensions.receiver.common.messaging.MessageReader;
 import com.expedia.apiary.extensions.receiver.sqs.messaging.SqsMessageReader;
 
+import com.expediagroup.beekeeper.core.filter.ListenerEventFilter;
+import com.expediagroup.beekeeper.core.filter.TableParameterListenerEventFilter;
+import com.expediagroup.beekeeper.core.messaging.EventReader;
+import com.expediagroup.beekeeper.core.messaging.FilteringMessageReader;
+import com.expediagroup.beekeeper.core.messaging.MessageReaderAdapter;
+import com.expediagroup.beekeeper.core.model.HousekeepingPath;
 import com.expediagroup.beekeeper.scheduler.apiary.filter.EventTypeListenerEventFilter;
-import com.expediagroup.beekeeper.scheduler.apiary.filter.ListenerEventFilter;
 import com.expediagroup.beekeeper.scheduler.apiary.filter.MetadataOnlyListenerEventFilter;
-import com.expediagroup.beekeeper.scheduler.apiary.filter.TableParameterListenerEventFilter;
-import com.expediagroup.beekeeper.scheduler.apiary.messaging.FilteringMessageReader;
 import com.expediagroup.beekeeper.scheduler.apiary.messaging.MessageEventToPathEventMapper;
-import com.expediagroup.beekeeper.scheduler.apiary.messaging.MessageReaderAdapter;
-import com.expediagroup.beekeeper.scheduler.apiary.messaging.PathEventReader;
 import com.expediagroup.beekeeper.scheduler.apiary.messaging.RetryingMessageReader;
 
 @Configuration
@@ -61,15 +62,15 @@ public class CommonBeans {
 
   @Bean(name = "filteringMessageReader")
   MessageReader filteringMessageReader(@Qualifier("retryingMessageReader") MessageReader messageReader,
-    TableParameterListenerEventFilter tableParameterFilter, EventTypeListenerEventFilter eventTypeFilter,
-    MetadataOnlyListenerEventFilter metadataOnlyListenerEventFilter) {
+                                       TableParameterListenerEventFilter tableParameterFilter, EventTypeListenerEventFilter eventTypeFilter,
+                                       MetadataOnlyListenerEventFilter metadataOnlyListenerEventFilter) {
     List<ListenerEventFilter> filters = List.of(eventTypeFilter, tableParameterFilter, metadataOnlyListenerEventFilter);
     return new FilteringMessageReader(messageReader, filters);
   }
 
   @Bean
-  PathEventReader pathEventReader(@Qualifier("filteringMessageReader") MessageReader messageReader,
-    MessageEventToPathEventMapper mapper) {
-    return new MessageReaderAdapter(messageReader, mapper);
+  EventReader<HousekeepingPath> pathEventReader(@Qualifier("filteringMessageReader") MessageReader messageReader,
+                                                MessageEventToPathEventMapper mapper) {
+    return new MessageReaderAdapter<>(messageReader, mapper);
   }
 }

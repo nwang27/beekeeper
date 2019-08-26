@@ -37,7 +37,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import com.expediagroup.beekeeper.core.TestApplication;
-import com.expediagroup.beekeeper.core.model.EntityHousekeepingPath;
+import com.expediagroup.beekeeper.core.model.entity.EntityHousekeepingPath;
 import com.expediagroup.beekeeper.core.model.PathStatus;
 
 @ExtendWith(SpringExtension.class)

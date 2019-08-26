@@ -29,7 +29,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.expediagroup.beekeeper.core.error.BeekeeperException;
-import com.expediagroup.beekeeper.core.model.EntityHousekeepingPath;
+import com.expediagroup.beekeeper.core.model.entity.EntityHousekeepingPath;
 import com.expediagroup.beekeeper.core.repository.HousekeepingPathRepository;
 
 @ExtendWith(MockitoExtension.class)
