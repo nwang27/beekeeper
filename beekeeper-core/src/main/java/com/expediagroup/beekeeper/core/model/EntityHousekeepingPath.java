@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.expediagroup.beekeeper.core.model.entity;
+package com.expediagroup.beekeeper.core.model;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -31,9 +31,6 @@ import javax.persistence.Table;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.expediagroup.beekeeper.core.error.BeekeeperException;
-import com.expediagroup.beekeeper.core.model.DurationConverter;
-import com.expediagroup.beekeeper.core.model.HousekeepingPath;
-import com.expediagroup.beekeeper.core.model.PathStatus;
 
 @Entity
 @Table(name = "path")

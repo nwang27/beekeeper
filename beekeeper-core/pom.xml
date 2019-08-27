@@ -49,12 +49,26 @@
       <version>${junit.jupiter.version}</version>
       <scope>test</scope>
     </dependency>
-      <dependency>
-          <groupId>com.expedia.apiary</groupId>
-          <artifactId>apiary-receiver-common</artifactId>
-          <version>2.0.0</version>
-          <scope>compile</scope>
-      </dependency>
+    <dependency>
+      <groupId>com.expedia.apiary</groupId>
+      <artifactId>apiary-receiver-sqs</artifactId>
+      <version>2.0.0</version>
+      <exclusions>
+        <exclusion>
+          <groupId>jdk.tools</groupId>
+          <artifactId>jdk.tools</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-log4j12</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.logging.log4j</groupId>
+          <artifactId>log4j-slf4j-impl</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
       <dependency>
           <groupId>org.springframework.retry</groupId>
           <artifactId>spring-retry</artifactId>
@@ -65,12 +79,6 @@
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-java-sdk-core</artifactId>
       <version>1.11.520</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.expedia.apiary</groupId>
-      <artifactId>apiary-receiver-sqs</artifactId>
-      <version>2.0.0</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>

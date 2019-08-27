@@ -34,7 +34,7 @@ import com.expedia.apiary.extensions.receiver.common.messaging.MessageReader;
 import com.expediagroup.beekeeper.core.messaging.MessageReaderAdapter;
 import com.expediagroup.beekeeper.core.model.Event;
 import com.expediagroup.beekeeper.core.model.HousekeepingPath;
-import com.expediagroup.beekeeper.core.model.entity.EntityHousekeepingPath;
+import com.expediagroup.beekeeper.core.model.EntityHousekeepingPath;
 import com.expediagroup.beekeeper.scheduler.apiary.messaging.MessageEventToPathEventMapper;
 
 @ExtendWith(MockitoExtension.class)

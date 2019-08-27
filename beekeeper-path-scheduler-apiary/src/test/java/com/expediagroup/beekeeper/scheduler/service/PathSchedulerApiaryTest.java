@@ -39,7 +39,7 @@ import com.expediagroup.beekeeper.core.error.BeekeeperException;
 import com.expediagroup.beekeeper.core.messaging.EventReader;
 import com.expediagroup.beekeeper.core.model.Event;
 import com.expediagroup.beekeeper.core.model.HousekeepingPath;
-import com.expediagroup.beekeeper.core.model.entity.EntityHousekeepingPath;
+import com.expediagroup.beekeeper.core.model.EntityHousekeepingPath;
 import com.expediagroup.beekeeper.scheduler.apiary.service.PathSchedulerApiary;
 
 @ExtendWith(MockitoExtension.class)

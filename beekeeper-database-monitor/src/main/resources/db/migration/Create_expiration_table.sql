@@ -1,3 +1,4 @@
+USE beekeeper;
 
 CREATE TABLE expiration (
   id BIGINT(20) AUTO_INCREMENT,

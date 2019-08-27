@@ -50,7 +50,7 @@ import com.amazonaws.services.sqs.model.PurgeQueueRequest;
 import com.amazonaws.services.sqs.model.SendMessageRequest;
 
 import com.expediagroup.beekeeper.core.model.PathStatus;
-import com.expediagroup.beekeeper.core.model.entity.EntityHousekeepingPath;
+import com.expediagroup.beekeeper.core.model.EntityHousekeepingPath;
 import com.expediagroup.beekeeper.scheduler.apiary.BeekeeperPathSchedulerApiary;
 
 public class BeekeeperPathSchedulerApiaryIntegrationTest {
