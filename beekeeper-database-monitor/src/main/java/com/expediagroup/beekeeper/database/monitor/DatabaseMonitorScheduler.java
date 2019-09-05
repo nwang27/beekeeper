@@ -26,7 +26,7 @@ public class DatabaseMonitorScheduler implements ApplicationContextAware {
     public static void main(String[] args) {
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
         new SpringApplicationBuilder(DatabaseMonitorScheduler.class)
-                .properties("spring.config.additional-location:classpath:/beekeeper-data-monitor-config.yml,"
+                .properties("spring.config.additional-location:classpath:/beekeeper-database-monitor-application.yml,"
                         + "${config:null}")
                 .build()
                 .run(args);

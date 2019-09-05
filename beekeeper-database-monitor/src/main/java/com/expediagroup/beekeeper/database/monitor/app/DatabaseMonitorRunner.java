@@ -39,14 +39,15 @@ public class DatabaseMonitorRunner implements ApplicationRunner {
         log.info("Starting application runner");
         while (running.get()) {
             try {
-                expirationDateUpdateService.UpdateExpirationDate();
-            } catch(Exception e) {
+                expirationDateUpdateService.updateExpirationDate();
+            } catch (Exception e) {
                 log.error("Error while updating expiration date", e);
             }
         }
         log.info("Runner has stopped");
         lock.unlock();
     }
+
     @PreDestroy
     public void destroy() {
         try {

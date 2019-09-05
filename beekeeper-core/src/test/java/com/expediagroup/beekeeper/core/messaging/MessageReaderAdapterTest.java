@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.expediagroup.beekeeper.scheduler.messaging;
+package com.expediagroup.beekeeper.core.messaging;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
@@ -31,11 +31,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.expedia.apiary.extensions.receiver.common.messaging.MessageEvent;
 import com.expedia.apiary.extensions.receiver.common.messaging.MessageReader;
 
-import com.expediagroup.beekeeper.core.messaging.MessageReaderAdapter;
 import com.expediagroup.beekeeper.core.model.Event;
 import com.expediagroup.beekeeper.core.model.HousekeepingPath;
 import com.expediagroup.beekeeper.core.model.EntityHousekeepingPath;
-import com.expediagroup.beekeeper.scheduler.apiary.messaging.MessageEventToPathEventMapper;
 
 @ExtendWith(MockitoExtension.class)
 public class MessageReaderAdapterTest {
@@ -43,7 +41,7 @@ public class MessageReaderAdapterTest {
   private MessageReader delegate;
 
   @Mock
-  private MessageEventToPathEventMapper mapper;
+  private EventMapper mapper;
 
   @Mock
   private MessageEvent messageEvent;

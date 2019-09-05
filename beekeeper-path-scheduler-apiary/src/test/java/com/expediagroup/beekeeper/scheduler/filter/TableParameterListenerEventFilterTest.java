@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.expediagroup.beekeeper.core.messaging;
+package com.expediagroup.beekeeper.scheduler.filter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -26,7 +26,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.expedia.apiary.extensions.receiver.common.event.AddPartitionEvent;
-import com.expediagroup.beekeeper.core.filter.TableParameterListenerEventFilter;
+import com.expediagroup.beekeeper.scheduler.apiary.filter.TableParameterListenerEventFilter;
 
 
 @ExtendWith(MockitoExtension.class)

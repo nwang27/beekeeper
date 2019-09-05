@@ -17,7 +17,6 @@ package com.expediagroup.beekeeper.core.model;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -30,10 +29,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.UpdateTimestamp;
-
-import com.expediagroup.beekeeper.core.model.DurationConverter;
-import com.expediagroup.beekeeper.core.model.ExpirationDate;
-import com.expediagroup.beekeeper.core.model.PathStatus;
 
 @Entity
 @Table(name = "expiration")
@@ -79,6 +74,9 @@ public class EntityExpirationDate implements ExpirationDate {
     @Column(name = "expiration_days", nullable = false, unique = true)
     private int expirationDays;
 
+    public EntityExpirationDate() {
+
+    }
 
 
     public EntityExpirationDate(final Long id, final int expirationDays, final String databaseName, final String tableName) {

@@ -18,6 +18,6 @@ public class MessageEventToExpirationDateMapper implements EventMapper<Expiratio
         // TODO build the actual entity
         EntityExpirationDate dummyExpDate = new EntityExpirationDate(1l, 30, "testDatabaseName", "testTableName");
 
-        return Optional.of(new Event<>( dummyExpDate, messageEvent ));
+        return Optional.of(new Event<>(dummyExpDate, messageEvent));
     }
 }

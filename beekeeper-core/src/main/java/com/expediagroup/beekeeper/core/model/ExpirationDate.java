@@ -15,8 +15,6 @@
  */
 package com.expediagroup.beekeeper.core.model;
 
-import java.util.Date;
-
 public interface ExpirationDate {
 
     Long getId();

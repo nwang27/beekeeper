@@ -13,13 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.expediagroup.beekeeper.core.filter;
+package com.expediagroup.beekeeper.scheduler.apiary.filter;
 
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
 import com.expedia.apiary.extensions.receiver.common.event.ListenerEvent;
+import com.expediagroup.beekeeper.core.filter.ListenerEventFilter;
 
 @Component
 public class TableParameterListenerEventFilter implements ListenerEventFilter {

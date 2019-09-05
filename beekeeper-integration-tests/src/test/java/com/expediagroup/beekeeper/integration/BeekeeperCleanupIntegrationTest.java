@@ -61,6 +61,7 @@ public class BeekeeperCleanupIntegrationTest {
 
   private static final String TABLE_NAME = "table";
   private static final String PATH_TABLE = "path";
+  private static final String EXPIRATION_TABLE = "expiration";
   private static final String FLYWAY_TABLE = "flyway_schema_history";
   private static final String SCHEDULER_DELAY_MS = "5000";
   private static final String AWS_ACCESS_KEY_ID = "accessKey";
@@ -115,6 +116,7 @@ public class BeekeeperCleanupIntegrationTest {
         .getObjectSummaries()
         .forEach(object -> amazonS3.deleteObject(BUCKET, object.getKey()));
     mySqlTestUtils.dropTable(PATH_TABLE);
+    mySqlTestUtils.dropTable(EXPIRATION_TABLE);
     mySqlTestUtils.dropTable(FLYWAY_TABLE);
     executorService.execute(() -> BeekeeperCleanup.main(new String[] {}));
     await().atMost(Duration.ONE_MINUTE)

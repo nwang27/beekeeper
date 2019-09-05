@@ -30,7 +30,7 @@ import com.expedia.apiary.extensions.receiver.common.messaging.MessageReader;
 import com.expedia.apiary.extensions.receiver.sqs.messaging.SqsMessageReader;
 
 import com.expediagroup.beekeeper.core.filter.ListenerEventFilter;
-import com.expediagroup.beekeeper.core.filter.TableParameterListenerEventFilter;
+import com.expediagroup.beekeeper.scheduler.apiary.filter.TableParameterListenerEventFilter;
 import com.expediagroup.beekeeper.core.messaging.EventReader;
 import com.expediagroup.beekeeper.core.messaging.FilteringMessageReader;
 import com.expediagroup.beekeeper.core.messaging.MessageReaderAdapter;
